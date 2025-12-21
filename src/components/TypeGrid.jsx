@@ -7,6 +7,7 @@ export default function TypeGrid({ onSelect }) {
   return (
     <div className="type-grid">
       {types.map(type => (
+        <div className="type-grid-child">
         <button
           key={type}
           className={`icon ${type}`}
@@ -17,7 +18,10 @@ export default function TypeGrid({ onSelect }) {
             alt={type}
             className="type-icon"
           />
+
         </button>
+        <span className={`${type} span-child`}>{type}</span>
+        </div>
       ))}
     </div>
   );

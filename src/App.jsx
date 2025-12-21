@@ -19,6 +19,12 @@ function App() {
     closeModal();
   };
 
+  const resetTypes = () => {
+  setType1(null);
+  setType2(null);
+  setActiveSlot(null);
+};
+
   const defensiveTypes = [type1, type2].filter(Boolean);
   const effectiveness = calculateEffectiveness(defensiveTypes);
   const grouped = groupEffectiveness(effectiveness);
@@ -39,6 +45,9 @@ function App() {
       <TypeModal isOpen={activeSlot !== null} onClose={closeModal}>
         <TypeGrid onSelect={handleSelect} />
       </TypeModal>
+        <button className="reset-btn" onClick={resetTypes}>
+    Resetear tipos
+  </button>
     </div>
     <div className="table-results-container">
 

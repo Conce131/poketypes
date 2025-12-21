@@ -1,3 +1,4 @@
+
 export default function TypeModal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
 

@@ -52,7 +52,7 @@ export const typeChart = {
     ghost: {
         weak: ["dark", "ghost"],
         resist: ["bug", "poison"],
-        immune: ["normal", "lucha"]
+        immune: ["normal", "fighting"]
     },
     grass: {
         weak: ["fire", "ice", "poison", "poison", "bug"],
@@ -89,6 +89,5 @@ export const typeChart = {
         resist: ["normal", "grass", "ice", "rock", "fairy", "flying", "bug", "dragon", "steel", "psychic"],
         immune: ["poison"]
     }
-
 
 };
