@@ -60,6 +60,11 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(7px);
 }
 
 .modal-content {
