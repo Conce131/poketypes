@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  margin-top: 30vh;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -25,10 +26,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  min-width: 320px;
-  min-height: 100vh;
   justify-content: center;
-  align-items: center;
 }
 
 h1 {
@@ -65,7 +63,7 @@ button:focus-visible {
 }
 
 .modal-content {
-  background: #653097;
+  background: #65309700;
   padding: 1rem;
   border-radius: 12px;
   max-width: 35rem;
@@ -93,6 +91,11 @@ button:focus-visible {
   border-radius: 3rem;
   width: 5rem;
   text-align: center;
+}
+
+.buttons-selector-container {
+  display: flex;
+  padding-bottom: 1rem;
 }
 
 .selector {
@@ -126,6 +129,7 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  width: 50vw;
 }
 
 /*
@@ -135,6 +139,7 @@ Tipos de pokemons
 .icons-container {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .result-column {

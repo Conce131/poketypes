@@ -33,15 +33,15 @@ function App() {
 
   return (
     <>
-    <div>
+ 
       <h1>Calculadora de resistencias Pokémon</h1>
 
        <div>
       <h1>Elige tipos defensivos:</h1>
-
+      <div className="buttons-selector-container">
       <TypeButton label="Tipo 1" value={type1} onClick={() => openModal(1)} />
       <TypeButton label="Tipo 2" value={type2} onClick={() => openModal(2)} />
-
+</div>
       <TypeModal isOpen={activeSlot !== null} onClose={closeModal}>
         <TypeGrid onSelect={handleSelect} />
       </TypeModal>
@@ -109,7 +109,7 @@ function App() {
   </div>
 
 </div>
-    </div>
+
     </>
   );
 }
