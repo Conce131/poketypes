@@ -55,7 +55,7 @@ export const typeChart = {
         immune: ["normal", "fighting"]
     },
     grass: {
-        weak: ["fire", "ice", "poison", "Flying", "bug"],
+        weak: ["fire", "ice", "poison", "flying", "bug"],
         resist: ["ground", "grass", "water", "electric"],
         immune: []
     },
