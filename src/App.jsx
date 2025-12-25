@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { calculateEffectiveness, groupEffectiveness } from "./assets/utils/effectiveness";
-import TypeButton from "./components/TypeButton";
-import TypeModal from "./components/TypeModal";
-import TypeGrid from "./components/TypeGrid";
-import { typeIcons } from "./assets/typesIcons";
+import TypeSelector from "./components/TypeSelector";
+import ResultsTable from "./components/ResultsTable";
+import { typeChart } from "./data/typeChart";
 
 function App() {
   const [type1, setType1] = useState(null);
   const [type2, setType2] = useState(null);
-  const [activeSlot, setActiveSlot] = useState(null);
 
-  const openModal = slot => setActiveSlot(slot);
-  const closeModal = () => setActiveSlot(null);
+  const types = Object.keys(typeChart);
 
-  const handleSelect = type => {
-    if (activeSlot === 1) setType1(type);
-    if (activeSlot === 2) setType2(type);
-    closeModal();
-  };
+ const handleTypeClick = (type) => {
+  if (type === type1) {
+    setType1(null);
+    return;
+  }
 
-  const resetTypes = () => {
-  setType1(null);
-  setType2(null);
-  setActiveSlot(null);
+  if (type === type2) {
+    setType2(null);
+    return;
+  }
+
+  if (!type1) {
+    setType1(type);
+  } else if (!type2) {
+    setType2(type);
+  } else {
+    setType1(type);
+    setType2(null);
+  }
 };
 
   const defensiveTypes = [type1, type2].filter(Boolean);
@@ -35,80 +41,23 @@ function App() {
     <>
  
       <h1>Calculadora de resistencias Pokémon</h1>
+      <h2>Elige tipos defensivos:</h2>
 
-       <div>
-      <h1>Elige tipos defensivos:</h1>
-      <div className="buttons-selector-container">
-      <TypeButton label="Tipo 1" value={type1} onClick={() => openModal(1)} />
-      <TypeButton label="Tipo 2" value={type2} onClick={() => openModal(2)} />
-</div>
-      <TypeModal isOpen={activeSlot !== null} onClose={closeModal}>
-        <TypeGrid onSelect={handleSelect} />
-      </TypeModal>
-        <button className="reset-btn" onClick={resetTypes}>
-    Resetear tipos
-  </button>
-    </div>
-    <div className="table-results-container">
-
-  <div className="result-column">
-    <h2>Inmunidades (x0)</h2>
-    <div className="icons-container">
-      {grouped.immune.length > 0 ? (
-        grouped.immune.map(type => (
-          <div key={type} className="type-item">
-            <div className={`icon-table ${type}`}><img src={typeIcons[type]} alt={type}  /></div>
-            <span>{type}</span>
-            <span>(x0)</span>
+       <div className="total-container">
+      <TypeSelector
+        types={types}
+        type1={type1}
+        type2={type2}
+        onTypeClick={handleTypeClick}
+        onClearType1={() => setType1(null)}
+        onClearType2={() => setType2(null)}
+      />  
+   <ResultsTable grouped={grouped} type1={type1}
+        type2={type2}
+        onTypeClick={handleTypeClick}
+        onClearType1={() => setType1(null)}
+        onClearType2={() => setType2(null)} />
           </div>
-        ))
-      ) : (
-        ''
-      )}
-    </div>
-  </div>
-
-  <div className="result-column">
-    <h2>Resistencias</h2>
-    <div className="icons-container">
-      {grouped.x025.map(type => (
-        <div key={type} className="type-item">
-          <div className={`icon-table ${type}`}><img src={typeIcons[type]} alt={type}  /></div>
-          <span>{type} </span>
-           <span>(x0.25)</span>
-        </div>
-      ))}
-      {grouped.x05.map(type => (
-        <div key={type} className="type-item">
-          <div className={`icon-table ${type}`}><img src={typeIcons[type]} alt={type}  /></div>
-          <span>{type}</span>
-          <span>(x0.5)</span>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div className="result-column">
-    <h2>Debilidades</h2>
-    <div className="icons-container">
-      {grouped.x2.map(type => (
-        <div key={type} className="type-item">
-          <div className={`icon-table ${type}`}><img src={typeIcons[type]} alt={type}  /></div>
-          <span>{type}</span>
-           <span>(x2)</span>
-        </div>
-      ))}
-      {grouped.x4.map(type => (
-        <div key={type} className="type-item">
-          <div className={`icon-table ${type}`}><img src={typeIcons[type]} alt={type}  /></div>
-          <span>{type}</span>
-           <span> (x4)</span>
-        </div>
-      ))}
-    </div>
-  </div>
-
-</div>
 
     </>
   );
