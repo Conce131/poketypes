@@ -1,66 +1,19 @@
-import { useState } from "react";
-import { calculateEffectiveness, groupEffectiveness } from "./assets/utils/effectiveness";
-import TypeSelector from "./components/TypeSelector";
-import ResultsTable from "./components/ResultsTable";
-import { typeChart } from "./data/typeChart";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import TypeCalculator from "./pages/TypeCalculator";
+import Pokedex from "./pages/Pokedex";
 
-function App() {
-  const [type1, setType1] = useState(null);
-  const [type2, setType2] = useState(null);
-
-  const types = Object.keys(typeChart);
-
- const handleTypeClick = (type) => {
-  if (type === type1) {
-    setType1(null);
-    return;
-  }
-
-  if (type === type2) {
-    setType2(null);
-    return;
-  }
-
-  if (!type1) {
-    setType1(type);
-  } else if (!type2) {
-    setType2(type);
-  } else {
-    setType1(type);
-    setType2(null);
-  }
-};
-
-  const defensiveTypes = [type1, type2].filter(Boolean);
-  const effectiveness = calculateEffectiveness(defensiveTypes);
-  const grouped = groupEffectiveness(effectiveness);
-  
-
-
+export default function App() {
   return (
-    <>
- 
-      <h1>Calculadora de resistencias Pokémon</h1>
-      <h2>Elige tipos defensivos:</h2>
+    <BrowserRouter>
+      <nav style={{ marginBottom: 20 }}>
+        <Link to="/">Calculadora</Link> |{" "}
+        <Link to="/pokedex">Pokédex</Link>
+      </nav>
 
-       <div className="total-container">
-      <TypeSelector
-        types={types}
-        type1={type1}
-        type2={type2}
-        onTypeClick={handleTypeClick}
-        onClearType1={() => setType1(null)}
-        onClearType2={() => setType2(null)}
-      />  
-   <ResultsTable grouped={grouped} type1={type1}
-        type2={type2}
-        onTypeClick={handleTypeClick}
-        onClearType1={() => setType1(null)}
-        onClearType2={() => setType2(null)} />
-          </div>
-
-    </>
+      <Routes>
+        <Route path="/" element={<TypeCalculator />} />
+        <Route path="/pokedex" element={<Pokedex />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

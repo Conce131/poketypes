@@ -189,6 +189,59 @@ Tipos de pokemons
   cursor: pointer;
 }
 
+//pokedex Css
+
+.pokemon-types-container {
+  display: flex;
+}
+
+.pokemon-type {
+  border-radius: 10px;
+  width: 4rem;
+}
+
+.pokemon-type p {
+  text-align: center;
+  padding-block: 0.1rem;
+  margin: 0;
+}
+
+.pokemon-stats-container {
+  margin-top: 1rem;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.stat-name {
+  width: 80px;
+  text-transform: capitalize;
+}
+
+.stat-bar {
+  flex: 1;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.stat-value {
+  width: 30px;
+  text-align: right;
+}
+
+//tipos
+
 .bug {
   background: #92bc2c;
   box-shadow: 0 0 20px #92bc2c;
