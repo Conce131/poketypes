@@ -4,8 +4,19 @@ import EvolutionChain from "../components/EvolutionChain";
 export default function Pokedex() {
   const [name, setName] = useState("");
   const [pokemon, setPokemon] = useState(null);
-  const [evolutionChain, setEvolutionChain] = useState(null);
+  const [evolutions, setEvolutions] = useState([]);
 
+const flattenEvolutionChain = (chain) => {
+    const result = [];
+
+    const traverse = (node) => {
+      result.push(node.species.name);
+      node.evolves_to.forEach(traverse);
+    };
+
+    traverse(chain);
+    return result;
+  };
   const searchPokemon = async (pokemonName) => {
     const searchName = pokemonName ?? name;
 
@@ -17,10 +28,10 @@ export default function Pokedex() {
 
     const speciesRes = await fetch(data.species.url);
     const speciesData = await speciesRes.json();
-
-    const evolutionRes = await fetch(speciesData.evolution_chain.url);
+  const evolutionRes = await fetch(speciesData.evolution_chain.url);
     const evolutionData = await evolutionRes.json();
-    setEvolutionChain(evolutionData.chain);
+
+    setEvolutions(flattenEvolutionChain(evolutionData.chain));
   };
 
   const getStatColor = (value) => {
@@ -37,18 +48,30 @@ export default function Pokedex() {
 
   return (
     <>
-      <h1>Pokédex</h1>
+     <div className="pokemon-finder">
+     <h1>Pokédex</h1>
+    <form
+    onSubmit={(e) => {
+        e.preventDefault();      // evita recarga de página
+        if (name.trim()) {
+        searchPokemon();
+        }
+    }}
+    >
+  <input
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    placeholder="Nombre del Pokémon"
+  />
 
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Nombre del Pokémon"
-      />
-
-      <button onClick={() => searchPokemon()}>Buscar</button>
-
+  <button type="submit" disabled={!name.trim()}>
+    Buscar
+  </button>
+</form>
+    </div>
       {pokemon && (
         <div className="pokemon-container">
+            <div className="pokemon-info">
           <h2>{pokemon.name}</h2>
 
           <img
@@ -68,7 +91,7 @@ export default function Pokedex() {
               </div>
             ))}
           </div>
-
+            </div>
           {/* STATS */}
           <div className="pokemon-stats-container">
             <h3>Total de stats: {totalStats}</h3>
@@ -97,14 +120,11 @@ export default function Pokedex() {
           </div>
 
           {/* EVOLUCIÓN */}
-          {evolutionChain && (
-            <>
-              <h3>Evolución</h3>
-              <EvolutionChain
-                chain={evolutionChain}
-                onSelect={searchPokemon}
-              />
-            </>
+          {evolutions.length > 0 && (
+            <EvolutionChain
+              evolutions={evolutions}
+              onSelect={searchPokemon}
+            />
           )}
         </div>
       )}

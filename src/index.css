@@ -1,13 +1,32 @@
+.pokemon-finder {
+  width: 73vw;
+}
+
+.pokemon-finder input {
+  font-size: 1.5rem;
+}
+
+.pokemon-finder button {
+  width: 6rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  width: 60rem;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  margin-top: 30vh;
-
+  margin-top: 10vh;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #140b1a;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,9 +43,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
+  margin-left: 27vw;
 }
 
 h1 {
@@ -189,15 +206,18 @@ Tipos de pokemons
   cursor: pointer;
 }
 
-//pokedex Css
-
 .pokemon-types-container {
   display: flex;
+  justify-content: center;
+}
+
+.pokemon-types-container div:first-child {
+  margin-right: 50px;
 }
 
 .pokemon-type {
   border-radius: 10px;
-  width: 4rem;
+  width: 4.5rem;
 }
 
 .pokemon-type p {
@@ -208,6 +228,7 @@ Tipos de pokemons
 
 .pokemon-stats-container {
   margin-top: 1rem;
+  width: 30rem;
 }
 
 .stat-row {
@@ -218,7 +239,7 @@ Tipos de pokemons
 }
 
 .stat-name {
-  width: 80px;
+  width: 10rem;
   text-transform: capitalize;
 }
 
@@ -240,7 +261,23 @@ Tipos de pokemons
   text-align: right;
 }
 
-//tipos
+.evolution-container {
+  display: flex;
+  max-width: 40vw;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.evolution-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.evolution-item img {
+  width: 10rem;
+}
 
 .bug {
   background: #92bc2c;
@@ -260,6 +297,7 @@ Tipos de pokemons
 .electric {
   background: #f2d94e;
   box-shadow: 0 0 20px #f2d94e;
+  color: #39323d;
 }
 
 .fire {

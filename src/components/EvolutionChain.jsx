@@ -1,45 +1,44 @@
 import { useEffect, useState } from "react";
 
-export default function EvolutionChain({ chain, onSelect }) {
+export default function EvolutionChain({ evolutions, onSelect }) {
+  return (
+    <div className="evolution-container">
+      {evolutions.map((name) => (
+        <EvolutionItem
+          key={name}
+          name={name}
+          onSelect={onSelect}
+        />
+      ))}
+    </div>
+  );
+}
+
+function EvolutionItem({ name, onSelect }) {
   const [sprite, setSprite] = useState(null);
 
   useEffect(() => {
     const fetchSprite = async () => {
       const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${chain.species.name}`
+        `https://pokeapi.co/api/v2/pokemon/${name}`
       );
-      const data = await res.json()
+      const data = await res.json();
       setSprite(data.sprites.other["official-artwork"].front_default);
     };
 
     fetchSprite();
-  }, [chain.species.name]);
+  }, [name]);
 
   return (
-    <div className="evolution-container">
-      {sprite && (
-        <img
-          src={sprite}
-          alt={chain.species.name}
-        />
-      )}
+    <div className="evolution-item">
+      {sprite && <img src={sprite} alt={name} onClick={() => onSelect(name)} />}
 
       <p
         className="evolution-button"
-        onClick={() => onSelect(chain.species.name)}
+        onClick={() => onSelect(name)}
       >
-        {chain.species.name}
+        {name}
       </p>
-
-      <div className="evolves-to">
-        {chain.evolves_to.map((e) => (
-          <EvolutionChain
-            key={e.species.name}
-            chain={e}
-            onSelect={onSelect}
-          />
-        ))}
-      </div>
     </div>
   );
 }
