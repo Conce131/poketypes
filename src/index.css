@@ -253,6 +253,24 @@ Tipos de pokemons
   width: 30rem;
 }
 
+.table-results-container.pokedex {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.table-results-container.pokedex > .result-column {
+}
+
+.table-results-container.pokedex > .result-column > .icons-container {
+  row-gap: 1rem;
+}
+
+.table-results-container.pokedex > :first-child {
+  display: none;
+}
+
 .stat-row {
   display: flex;
   align-items: center;
@@ -287,7 +305,6 @@ Tipos de pokemons
   display: flex;
   max-width: 40vw;
   margin-top: 4rem;
-  flex-wrap: wrap;
   cursor: pointer;
 }
 
@@ -299,6 +316,14 @@ Tipos de pokemons
 
 .evolution-item img {
   width: 10rem;
+}
+.x025 {
+  color: rgb(0, 255, 76);
+  border-radius: 10px;
+}
+
+.x4 {
+  color: rgb(168, 7, 48);
 }
 
 .bug {

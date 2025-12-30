@@ -1,30 +1,24 @@
 import ResultColumn from "./ResultColumn";
 import TypeButton from "./TypeButton";
 
-function ResultsTable({ grouped,type1,
+function ResultsTable({
+  grouped,
+  type1,
   type2,
   onClearType1,
-  onClearType2, }) {
+  onClearType2,
+  className = "",
+}) {
   return (
-
-    <div className="table-results-container">
-        <div className="showed-types">     
-        <TypeButton
-          label="Tipo 1"
-          value={type1}
-          onClick={onClearType1}
-        />
-        <TypeButton
-          label="Tipo 2"
-          value={type2}
-          onClick={onClearType2}
-        /></div>
+    <div className={`table-results-container ${className}`}>
+      <div className="showed-types">
+        <TypeButton label="Tipo 1" value={type1} onClick={onClearType1} />
+        <TypeButton label="Tipo 2" value={type2} onClick={onClearType2} />
+      </div>
 
       <ResultColumn
         title="Inmunidades"
-        groups={[
-          { multiplier: "x0", types: grouped.immune }
-        ]} 
+        groups={[{ multiplier: "x0", types: grouped.immune }]}
       />
 
       <ResultColumn

@@ -1,22 +1,16 @@
 import TypeButton from "./TypeButton";
 import TypeGrid from "./TypeGrid";
 
-function TypeSelector({
-  types,
-  type1,
-  type2,
-  onTypeClick,
-}) {
+function TypeSelector({ types, type1, type2, onTypeClick }) {
   return (
-      <div className="buttons-selector-container">
-        <TypeGrid
-          types={types}
-          type1={type1}
-          type2={type2}
-          onTypeClick={onTypeClick}
-        />
-
-      </div>
+    <div className="buttons-selector-container">
+      <TypeGrid
+        types={types}
+        type1={type1}
+        type2={type2}
+        onTypeClick={onTypeClick}
+      />
+    </div>
   );
 }
 

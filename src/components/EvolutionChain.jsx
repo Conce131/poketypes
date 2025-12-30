@@ -4,11 +4,7 @@ export default function EvolutionChain({ evolutions, onSelect }) {
   return (
     <div className="evolution-container">
       {evolutions.map((name) => (
-        <EvolutionItem
-          key={name}
-          name={name}
-          onSelect={onSelect}
-        />
+        <EvolutionItem key={name} name={name} onSelect={onSelect} />
       ))}
     </div>
   );
@@ -19,9 +15,7 @@ function EvolutionItem({ name, onSelect }) {
 
   useEffect(() => {
     const fetchSprite = async () => {
-      const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${name}`
-      );
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
       const data = await res.json();
       setSprite(data.sprites.other["official-artwork"].front_default);
     };
@@ -33,10 +27,7 @@ function EvolutionItem({ name, onSelect }) {
     <div className="evolution-item">
       {sprite && <img src={sprite} alt={name} onClick={() => onSelect(name)} />}
 
-      <p
-        className="evolution-button"
-        onClick={() => onSelect(name)}
-      >
+      <p className="evolution-button" onClick={() => onSelect(name)}>
         {name}
       </p>
     </div>

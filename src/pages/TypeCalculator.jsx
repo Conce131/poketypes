@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { calculateEffectiveness, groupEffectiveness } from "../assets/utils/effectiveness";
+import {
+  calculateEffectiveness,
+  groupEffectiveness,
+} from "../assets/utils/effectiveness";
 import TypeSelector from "../components/TypeSelector";
 import ResultsTable from "../components/ResultsTable";
 import { typeChart } from "../data/typeChart";
@@ -51,6 +54,7 @@ function TypeCalculator() {
         />
 
         <ResultsTable
+          className="calculator"
           grouped={grouped}
           type1={type1}
           type2={type2}
