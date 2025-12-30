@@ -381,3 +381,26 @@ Tipos de pokemons
     background-color: #f9f9f9;
   }
 }
+
+@media (max-width: 1250px) {
+  .total-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .table-results-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .result-column h2 {
+    padding: 2rem;
+  }
+
+  .showed-types {
+    display: none;
+  }
+
+  body {
+    margin-left: 1rem;
+  }
+}
