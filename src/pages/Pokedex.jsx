@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EvolutionChain from "../components/EvolutionChain";
+
 
 export default function Pokedex() {
   const [name, setName] = useState("");
   const [pokemon, setPokemon] = useState(null);
   const [evolutions, setEvolutions] = useState([]);
+  const [allPokemon, setAllPokemon] = useState([]);
+const [suggestions, setSuggestions] = useState([]);
+
+useEffect(() => {
+  const fetchPokemonList = async () => {
+    const res = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?limit=1000"
+    );
+    const data = await res.json();
+    setAllPokemon(data.results.map(p => p.name));
+  };
+
+  fetchPokemonList();
+}, []);
 
 const flattenEvolutionChain = (chain) => {
     const result = [];
@@ -59,10 +74,40 @@ const flattenEvolutionChain = (chain) => {
     }}
     >
   <input
-    value={name}
-    onChange={(e) => setName(e.target.value)}
-    placeholder="Nombre del Pokémon"
-  />
+  value={name}
+  onChange={(e) => {
+    const value = e.target.value.toLowerCase();
+    setName(value);
+
+    if (!value) {
+      setSuggestions([]);
+      return;
+    }
+
+    const filtered = allPokemon
+      .filter(p => p.startsWith(value))
+      .slice(0, 6); // máximo 6 sugerencias
+
+    setSuggestions(filtered);
+  }}
+  placeholder="Nombre del Pokémon"
+/>
+{suggestions.length > 0 && (
+  <ul className="suggestions">
+    {suggestions.map((p) => (
+      <li
+        key={p}
+        onClick={() => {
+          setName(p);
+          setSuggestions([]);
+          searchPokemon(p);
+        }}
+      >
+        {p}
+      </li>
+    ))}
+  </ul>
+)}
 
   <button type="submit" disabled={!name.trim()}>
     Buscar
